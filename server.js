@@ -1,17 +1,21 @@
 const admin = require('firebase-admin');
-const mApp = require('express');
-const path =require('path');
-const serviceAccount= require(path.join(__dirname, 'serviceKey.json'));
+const express = require('express');
+require('dotenv').config();
+
 
 admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
+    credential: admin.credential.cert({
+        projectId: process.env.FIREBASE_PROJECT_ID,
+        privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+        clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+      }),
     // credential: admin.credential.applicationDefault(),
     
 });
 
-const app = mApp();
-app.use(mApp.json()); 
-app.use(mApp.urlencoded({ extended: true })); 
+const app = express();
+app.use(express.json()); 
+app.use(express.urlencoded({ extended: true })); 
 
 
 app.post('/sendNotification', (req, res) => {
