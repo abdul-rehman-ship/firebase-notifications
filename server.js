@@ -10,8 +10,8 @@ admin.initializeApp({
 });
 
 const app = mApp();
-app.use(express.json()); 
-app.use(express.urlencoded({ extended: true })); 
+app.use(mApp.json()); 
+app.use(mApp.urlencoded({ extended: true })); 
 
 
 app.post('/sendNotification', (req, res) => {
