@@ -18,11 +18,11 @@ app.use(express.static("public"));
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true })); 
 
-app.get('/',async(req,res)=>{
+app.get('/',(req,res)=>{
     res.send('Hello World');
 })
 
-app.post('/sendNotification', async(req, res) => {
+app.post('/sendNotification', (req, res) => {
 
 
     const { targetToken, title, message } = req.body;
